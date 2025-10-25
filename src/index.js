@@ -18,6 +18,9 @@ app.set('view engine', 'hbs');
 app.set('views', './src/views');
 
 app.use(homecontroller);
-app.use('/movies', moviecontroller)
+app.use('/movies', moviecontroller);
+app.use('*url', (req, res) => {
+    res.render('404');
+});
 
 app.listen(5000, () => console.log('Server is listening on http://localhost:5000....'));
