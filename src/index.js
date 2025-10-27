@@ -11,6 +11,11 @@ app.use(express.urlencoded());
 
 app.engine('hbs', handlebars.engine({
     extname: 'hbs',
+    helpers: {
+        showRating(rating) {
+            return '★'.repeat(Math.floor(rating));
+        }
+    }
 }));
 
 app.set('view engine', 'hbs');
