@@ -38,8 +38,15 @@ const movies = [
 
 
 export default {
-    getAll() {
-        return movies;
+    getAll(filter = {}) {
+
+        let result = movies.slice();
+
+        if (filter.search) {
+            result = result.filter(movie => movie.title.toLowerCase().includes(filter.search.toLowerCase()));
+        }
+
+        return result;
     },
     create(movieData) {
         movieData.id = uuid();
