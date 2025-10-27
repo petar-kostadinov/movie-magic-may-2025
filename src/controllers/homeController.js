@@ -5,7 +5,7 @@ const homecontroller = express.Router();
 
 homecontroller.get('/', (req, res) => {
     const movies = movieService.getAll();
-    
+
     res.render('home', { movies });
 });
 
