@@ -2,14 +2,44 @@ import { Schema, model } from "mongoose";
 
 
 const movieShema = new Schema({
-    title: String,
-    category: String,
-    genre: String,
-    director: String,
-    year: Number,
-    imageUrl: String,
-    rating: Number,
-    description: String,
+    title: {
+        type: String,
+        required: true,
+    },
+    category: {
+        type: String,
+        required: true,
+    },
+    genre: {
+        type: String,
+        required: true,
+    },
+    director: {
+        type: String,
+        required: true,
+    },
+    year: {
+        type: Number,
+        required: true,
+        min: 1970,
+        max: new Date().getFullYear() + 5,
+    },
+    imageUrl: {
+        type: String,
+        required: true,
+        validate: /^https?:\/\//,
+    },
+    rating: {
+        type: Number,
+        required: true,
+        min: 1,
+        max: 10,
+    },
+    description: {
+        type: String,
+        required: true,
+        maxLength: [100, 'Description is too long'],
+    },
 });
 
 const Movie = model('Movie', movieShema);
