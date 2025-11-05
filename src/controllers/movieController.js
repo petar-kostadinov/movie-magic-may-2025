@@ -32,4 +32,12 @@ moviecontroller.get('/search', async (req, res) => {
     res.render('search', { movies, filter });
 })
 
+moviecontroller.get('/:movieId/attach', async (req, res) => {
+    const movieId = req.params.movieId;
+
+    const movie = await movieService.getOne(movieId);
+
+    res.render('movie/attach', { movie });
+});
+
 export default moviecontroller;
