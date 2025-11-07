@@ -1,4 +1,5 @@
 import Movie from "../models/Movie.js";
+import Cast from "../models/Cast.js";
 
 export default {
     async getAll(filter = {}) {
@@ -34,5 +35,13 @@ export default {
        movie.casts.push(castId); 
 
        return movie.save();
+    },
+
+    async getCasts(movieId) {
+        const movie = await this.getOne(movieId);
+
+        const casts = await Cast.find({ _id: { $in: movie.casts } });
+
+        return casts;
     }
-} 
+}

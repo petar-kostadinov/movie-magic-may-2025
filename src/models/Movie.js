@@ -38,7 +38,7 @@ const movieShema = new Schema({
     description: {
         type: String,
         required: true,
-        maxLength: [1000, 'Description is too long'],
+        maxLength: [1500, 'Description is too long'],
     },
     casts: [{
         type: Types.ObjectId,
