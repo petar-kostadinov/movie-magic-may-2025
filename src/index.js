@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import homecontroller from './controllers/homeController.js';
 import moviecontroller from './controllers/movieController.js';
 import castController from './controllers/castController.js';
+import userController from './controllers/userController.js';
 
 const app = express();
 
@@ -43,6 +44,7 @@ app.set('views', './src/views');
 app.use(homecontroller);
 app.use('/movies', moviecontroller);
 app.use('/casts', castController);
+app.use('/users', userController);
 app.use('*url', (req, res) => {
     res.render('404');
 });
