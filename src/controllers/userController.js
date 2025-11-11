@@ -4,7 +4,7 @@ import userService from "../services/userService.js";
 const userController = Router();
 
 userController.get('/register', (req, res) => {
-res.render('user/register');
+    res.render('user/register');
 });
 
 userController.post('/register', async (req, res) => {
@@ -13,8 +13,12 @@ userController.post('/register', async (req, res) => {
     await userService.register(userData);
 
     res.redirect('/users/login');
-    
-    
+
+
+});
+
+userController.get('/login', (req, res) => {
+    res.render('user/login');
 });
 
 export default userController;
