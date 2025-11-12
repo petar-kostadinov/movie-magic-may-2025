@@ -21,11 +21,13 @@ moviecontroller.post('/create', async (req, res) => {
 moviecontroller.get('/:movieId/details', async (req, res) => {
     const movieId = req.params.movieId;
 
+    const userId = req.user?.id;
+
     const movie = await movieService.getOne(movieId);
 
-    //const casts = await movieService.getCasts(movieId);
+    const isOwner = movie.owner?.equals(userId);
 
-    res.render('movie/details', { movie });
+        res.render('movie/details', { movie, isOwner });
 });
 
 moviecontroller.get('/search', async (req, res) => {
