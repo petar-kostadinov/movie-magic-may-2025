@@ -6,10 +6,13 @@ import homecontroller from './controllers/homeController.js';
 import moviecontroller from './controllers/movieController.js';
 import castController from './controllers/castController.js';
 import userController from './controllers/userController.js';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 
 app.use(express.static('./src/public'));
+
+app.use(cookieParser());
 
 app.use(express.urlencoded());
 

@@ -8,9 +8,9 @@ userController.get('/register', (req, res) => {
 });
 
 userController.post('/register', async (req, res) => {
-    const userData = req.body;
+    const {email, password, repass} = req.body;
 
-    await userService.register(userData);
+    await userService.register({email, password, repass});
 
     res.redirect('/users/login');
 
@@ -26,8 +26,7 @@ userController.post('/login', async (req, res) => {
 
     const token = await userService.login(email, password);
 
-    console.log(token);
-    
+        
 
     res.redirect('/');
 })
