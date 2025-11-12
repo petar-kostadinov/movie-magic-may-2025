@@ -10,7 +10,9 @@ export const auth = (req, res, next) => {
     }
 
     try {
-        const decodedToken = jsonwebtoken.verify(token, jwSecret);
+        const { id, email } = jsonwebtoken.verify(token, jwSecret);
+
+        req.user = { id, email };
 
         next();
     } catch (err) {
