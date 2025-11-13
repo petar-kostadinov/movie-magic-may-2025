@@ -27,7 +27,7 @@ moviecontroller.get('/:movieId/details', async (req, res) => {
 
     const isOwner = movie.owner?.equals(userId);
 
-        res.render('movie/details', { movie, isOwner });
+    res.render('movie/details', { movie, isOwner });
 });
 
 moviecontroller.get('/search', async (req, res) => {
@@ -50,16 +50,26 @@ moviecontroller.get('/:movieId/attach', async (req, res) => {
 });
 
 moviecontroller.post('/:movieId/attach', async (req, res) => {
-    
+
     const movieId = req.params.movieId;
 
-        
+
     const castId = req.body.cast;
 
     await movieService.attach(movieId, castId);
 
     res.redirect(`/movies/${movieId}/details`);
-    
+
+});
+
+moviecontroller.get('/:movieId/delete', async (req, res) => {
+
+    const movieId = req.params.movieId;
+
+    await movieService.delete(movieId);
+
+    res.redirect('/');
+
 });
 
 export default moviecontroller;
