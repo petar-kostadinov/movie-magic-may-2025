@@ -72,4 +72,8 @@ moviecontroller.get('/:movieId/delete', async (req, res) => {
 
 });
 
+moviecontroller.get('/:movieId/edit', async (req, res) => {
+res.render('movie/edit');
+});
+
 export default moviecontroller;
