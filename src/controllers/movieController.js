@@ -1,6 +1,7 @@
 import express from 'express'
 import movieService from '../services/movieService.js';
 import castService from '../services/castService.js';
+import { getCategoryOptionsViewData } from '../utils/movieUtils.js';
 
 const moviecontroller = express.Router();
 
@@ -86,7 +87,9 @@ moviecontroller.get('/:movieId/edit', async (req, res) => {
         return res.status(403).end();
     }
 
-    res.render('movie/edit', { movie });
+    const categoryOptionsViewData = getCategoryOptionsViewData(movie.category);
+
+    res.render('movie/edit', { movie, categoryOptions: categoryOptionsViewData });
 });
 
 moviecontroller.post('/:movieId/edit', async (req, res) => {

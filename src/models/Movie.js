@@ -13,11 +13,11 @@ const movieShema = new Schema({
     genre: {
         type: String,
         required: true,
+        lowercase: true,
     },
     director: {
         type: String,
         required: true,
-        lowercase: true,
     },
     year: {
         type: Number,
