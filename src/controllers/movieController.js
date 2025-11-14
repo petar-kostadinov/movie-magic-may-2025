@@ -6,7 +6,7 @@ import { getCategoryOptionsViewData } from '../utils/movieUtils.js';
 const moviecontroller = express.Router();
 
 moviecontroller.get('/create', (req, res) => {
-    res.render('create');
+    res.render('create', { pageTitle: 'Create' });
 });
 
 moviecontroller.post('/create', async (req, res) => {
@@ -28,7 +28,7 @@ moviecontroller.get('/:movieId/details', async (req, res) => {
 
     const isOwner = movie.owner?.equals(userId);
 
-    res.render('movie/details', { movie, isOwner });
+    res.render('movie/details', { movie, isOwner, pageTitle: 'Details' });
 });
 
 moviecontroller.get('/search', async (req, res) => {
@@ -37,7 +37,7 @@ moviecontroller.get('/search', async (req, res) => {
 
     const movies = await movieService.getAll(filter);
 
-    res.render('search', { movies, filter });
+    res.render('search', { movies, filter, pageTitle: 'Search' });
 })
 
 moviecontroller.get('/:movieId/attach', async (req, res) => {
@@ -47,7 +47,7 @@ moviecontroller.get('/:movieId/attach', async (req, res) => {
 
     const casts = await castService.getAll({ exclude: movie.casts });
 
-    res.render('movie/attach', { movie, casts });
+    res.render('movie/attach', { movie, casts, pageTitle: 'Attach' });
 });
 
 moviecontroller.post('/:movieId/attach', async (req, res) => {
@@ -89,7 +89,11 @@ moviecontroller.get('/:movieId/edit', async (req, res) => {
 
     const categoryOptionsViewData = getCategoryOptionsViewData(movie.category);
 
-    res.render('movie/edit', { movie, categoryOptions: categoryOptionsViewData });
+    res.render('movie/edit', {
+        movie,
+        categoryOptions: categoryOptionsViewData,
+        pageTitle: 'Edit'
+    });
 });
 
 moviecontroller.post('/:movieId/edit', async (req, res) => {
