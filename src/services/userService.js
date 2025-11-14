@@ -1,12 +1,15 @@
 import bcrypt from 'bcrypt'
-import jsonWebToken from 'jsonwebtoken';
 
 import User from "../models/User.js"
-import { jwSecret } from '../config/index.js';
+import { generateAuthToken } from '../utils/authUtils.js';
 
 export default {
-    register(userData) {
-        return User.create(userData);
+    async register(userData) {
+        const user = await User.create(userData);
+
+        const token = generateAuthToken(user);
+
+        return token;
     },
     async login(email, password) {
 
@@ -22,13 +25,8 @@ export default {
             return new Error('Invalid password');
         }
 
-        const payLoad = {
-            id: user.id,
-            email: user.email,
-        };
-
-        const token = jsonWebToken.sign(payLoad, jwSecret, { expiresIn: '2h' });
+        const token = generateAuthToken(user);
 
         return token;
-    }
-}
+    },
+};
