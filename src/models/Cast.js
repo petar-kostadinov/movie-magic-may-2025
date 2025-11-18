@@ -4,6 +4,8 @@ const castShema = new Schema({
     name: {
         type: String,
         required: true,
+        validate: [validCharactersPattern, 'Only english letters,digits and whitespace are allowed!'],
+        minLength: [5, 'Name should be at least 5 characters long'],
     },
     age: {
         type: Number,
@@ -14,6 +16,7 @@ const castShema = new Schema({
     born: {
         type: String,
         requred: true,
+        minLength: [10, 'Born should be at least 10 characters long'],
     },
     imageUrl: {
         type: String,
