@@ -1,5 +1,7 @@
 import { Schema, model } from "mongoose";
 
+const validCharactersPattern = /^[a-zA-Z0-9 ]+$/;
+
 const castShema = new Schema({
     name: {
         type: String,

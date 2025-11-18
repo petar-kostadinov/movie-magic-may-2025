@@ -14,6 +14,10 @@ const movieShema = new Schema({
     category: {
         type: String,
         required: true,
+        enum: {
+            values: ['tv-show', 'animation', 'movie', 'documentary', 'short-film'],
+            message: (props) => `${props.value} is not a valid category!`
+        }
     },
     genre: {
         type: String,
