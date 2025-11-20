@@ -3,21 +3,35 @@ import movieService from '../services/movieService.js';
 import castService from '../services/castService.js';
 import { getCategoryOptionsViewData } from '../utils/movieUtils.js';
 import { isAuth } from '../middleware/authMiddleware.js';
+import { getErrorMessage } from '../utils/errorUtils.js';
 
 const moviecontroller = express.Router();
 
 moviecontroller.get('/create', isAuth, (req, res) => {
-    res.render('create', { pageTitle: 'Create' });
+    res.render('movie/create', { pageTitle: 'Create' });
 });
 
 moviecontroller.post('/create', isAuth, async (req, res) => {
     const userId = req.user.id;
 
     const newMovie = req.body;
+    try {
+        await movieService.create(newMovie, userId);
 
-    await movieService.create(newMovie, userId);
+        res.redirect('/');
 
-    res.redirect('/');
+    } catch (err) {
+
+        const categoryOptionsViewData = getCategoryOptionsViewData(newMovie.category);
+
+        res.render('movie/create', {
+            pageTitle: 'Create',
+            error: getErrorMessage(err),
+            movie: newMovie,
+            categoryOptions: categoryOptionsViewData,
+        });
+    }
+
 });
 
 moviecontroller.get('/:movieId/details', async (req, res) => {

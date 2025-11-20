@@ -7,13 +7,13 @@ const validCharactersPattern = /^[a-zA-Z0-9 ]+$/;
 const movieShema = new Schema({
     title: {
         type: String,
-        required: true,
+        required: [true, 'This field is required'],
         validate: [validCharactersPattern, 'Only english letters,digits and whitespace are allowed!'],
         minLength: [5, 'Title should be at least 5 characters long'],
     },
     category: {
         type: String,
-        required: true,
+        required: [true, 'This field is required'],
         enum: {
             values: ['tv-show', 'animation', 'movie', 'documentary', 'short-film'],
             message: (props) => `${props.value} is not a valid category!`
@@ -21,20 +21,20 @@ const movieShema = new Schema({
     },
     genre: {
         type: String,
-        required: true,
+        required: [true, 'This field is required'],
         lowercase: true,
         minLength: [5, 'Genre should be at least 5 characters long'],
         validate: [validCharactersPattern, 'Only english letters,digits and whitespace are allowed!'],
     },
     director: {
         type: String,
-        required: true,
+        required: [true, 'This field is required'],
         minLength: [5, 'Director should be at least 5 characters long'],
         validate: [validCharactersPattern, 'Only english letters,digits and whitespace are allowed!'],
     },
     year: {
         type: Number,
-        required: true,
+        required: [true, 'This field is required'],
         min: [1900, 'Movie year cannot be less than 1900 year'],
         max: [maxYearAllowed, `Year cannot be larger than ${maxYearAllowed}`],
     },
