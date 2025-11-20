@@ -1,5 +1,6 @@
 export function getCategoryOptionsViewData(category) {
     const options = [
+        { value: '', title: '— Select category —', placeholder: true },
         { value: 'tv-show', title: 'TV Show' },
         { value: 'animation', title: 'Animation' },
         { value: 'movie', title: 'Movie' },

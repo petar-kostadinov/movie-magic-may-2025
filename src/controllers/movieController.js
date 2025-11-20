@@ -8,7 +8,12 @@ import { getErrorMessage } from '../utils/errorUtils.js';
 const moviecontroller = express.Router();
 
 moviecontroller.get('/create', isAuth, (req, res) => {
-    res.render('movie/create', { pageTitle: 'Create' });
+
+    const categoryOptionsViewData = getCategoryOptionsViewData("");
+
+    res.render('movie/create', {
+        categoryOptions: categoryOptionsViewData,
+    });
 });
 
 moviecontroller.post('/create', isAuth, async (req, res) => {
