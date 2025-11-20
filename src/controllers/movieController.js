@@ -99,7 +99,7 @@ moviecontroller.get('/:movieId/edit', isAuth, async (req, res) => {
     const isOwner = movie.owner?.equals(userId);
 
     if (!isOwner) {
-        return res.status(403).end();
+        return res.render('404', { error: 'You do not have rights to this resource!' });
     }
 
     const categoryOptionsViewData = getCategoryOptionsViewData(movie.category);

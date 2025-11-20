@@ -7,7 +7,7 @@ homecontroller.get('/', async (req, res) => {
     const movies = await movieService.getAll();
        
               
-    res.render('home', { movies, pageTitle: 'Home' });
+    res.render('home', { movies });
 });
 
 homecontroller.get('/about', (req, res) => {

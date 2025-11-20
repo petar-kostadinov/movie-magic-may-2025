@@ -22,6 +22,9 @@ app.engine('hbs', handlebars.engine({
     helpers: {
         showRating(rating) {
             return '★'.repeat(Math.floor(rating));
+        },
+        setTitle(title) {
+            this.pageTitle = title;
         }
     },
     runtimeOptions: {
